@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OverSpeed | Almacén</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="fondo"></div>
+
+  <section id="login-screen" class="login-screen">
+    <div class="login-card">
+      <div class="logo"><span>OVER</span><strong>SPEED</strong></div>
+      <p class="subtitulo">PANEL DE TRABAJADORES</p>
+
+      <form id="login-form">
+        <label>USUARIO</label>
+        <input id="usuario" type="text" autocomplete="username" placeholder="Introduce tu usuario" required>
+
+        <label>CONTRASEÑA</label>
+        <input id="password" type="password" autocomplete="current-password" placeholder="Introduce tu contraseña" required>
+
+        <button class="btn-principal" type="submit">INICIAR SESIÓN</button>
+        <p id="login-error" class="error"></p>
+      </form>
+    </div>
+  </section>
+
+  <div id="app" class="hidden">
+    <header class="header">
+      <div>
+        <div class="logo"><span>OVER</span><strong>SPEED</strong></div>
+        <p id="subtitulo-panel">GESTIÓN DE ALMACÉN</p>
+      </div>
+      <div class="usuario-activo">
+        <span id="rol-usuario">TRABAJADOR</span>
+        <strong id="nombre-trabajador"></strong>
+        <button id="logout" class="btn-secundario">CERRAR SESIÓN</button>
+      </div>
+    </header>
+
+    <main class="contenedor">
+      <section class="seccion">
+        <div class="titulo-seccion">
+          <div class="icono-seccion">📦</div>
+          <div>
+            <h2>ALMACÉN</h2>
+            <p id="descripcion-almacen">Selecciona los artículos que vas a retirar</p>
+          </div>
+        </div>
+        <div id="almacen"></div>
+      </section>
+
+      <aside class="seccion resumen-panel">
+        <div class="titulo-seccion">
+          <div class="icono-seccion">📋</div>
+          <div>
+            <h2 id="titulo-lateral">SALIDA</h2>
+            <p id="descripcion-lateral">Artículos seleccionados</p>
+          </div>
+        </div>
+
+        <div id="seleccionados" class="seleccionados"></div>
+
+        <button id="confirmar" class="btn-principal" disabled>
+          ✓ CONFIRMAR SALIDA
+        </button>
+
+        <button id="vaciar" class="btn-secundario btn-ancho">
+          VACIAR SELECCIÓN
+        </button>
+
+        <div id="admin-tools" class="admin-tools hidden">
+          <div class="separador"></div>
+
+          <h3>GESTIÓN DE STOCK</h3>
+          <p class="admin-descripcion">Añade o elimina unidades de artículos que ya existen en el almacén.</p>
+
+          <label>ARTÍCULO</label>
+          <input id="stock-nombre" type="text" list="lista-articulos" placeholder="Ej. Motor V8" autocomplete="off">
+          <datalist id="lista-articulos"></datalist>
+
+          <label>CANTIDAD</label>
+          <input id="stock-cantidad" type="number" min="1" step="1" value="1">
+
+          <div class="admin-botones">
+            <button id="anadir-stock" class="btn-principal" type="button">+ AÑADIR STOCK</button>
+            <button id="eliminar-stock" class="btn-danger" type="button">− ELIMINAR STOCK</button>
+          </div>
+
+          <div class="nota admin-nota">
+            Solo Hugo puede modificar el stock. No se pueden crear artículos nuevos desde este panel.
+          </div>
+
+          <div class="separador"></div>
+
+          <h3>GESTIÓN DE USUARIOS</h3>
+          <p class="admin-descripcion">Crea cuentas nuevas para que tus trabajadores puedan iniciar sesión.</p>
+
+          <label>NUEVO USUARIO</label>
+          <input id="nuevo-usuario" type="text" placeholder="Ej. juan" autocomplete="off">
+
+          <label>CONTRASEÑA</label>
+          <input id="nueva-password" type="password" placeholder="Contraseña de la cuenta" autocomplete="new-password">
+
+          <label>TIPO DE CUENTA</label>
+          <select id="nuevo-rol">
+            <option value="trabajador">TRABAJADOR</option>
+            <option value="admin">ADMINISTRADOR</option>
+          </select>
+
+          <button id="crear-usuario" class="btn-principal" type="button">+ CREAR CUENTA</button>
+
+          <div class="nota admin-nota">
+            Elige si la nueva cuenta tendrá acceso al menú de trabajadores o al panel completo de administrador.
+          </div>
+
+          <div id="lista-usuarios" class="lista-usuarios"></div>
+        </div>
+
+        <div class="nota">
+          La salida se aplicará al confirmar. Revisa las cantidades antes de aceptar.
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
